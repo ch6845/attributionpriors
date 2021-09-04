@@ -84,7 +84,7 @@ class AttributionPriorExplainer(object):
 
         shape = [batch_size, k_] + [1] * num_input_dims
         interp_coef = t_tensor.view(*shape)
-
+        
         # Evaluate the end points
         end_point_ref = (1.0 - interp_coef) * reference_tensor
 
@@ -144,6 +144,7 @@ class AttributionPriorExplainer(object):
                 self.batch_size, 
                 self.k, 
                 *(shape[1:])).to(DEFAULT_DEVICE)
+        
         samples_input = self._get_samples_input(input_tensor, reference_tensor)
         samples_delta = self._get_samples_delta(input_tensor, reference_tensor)
         grad_tensor = self._get_grads(samples_input, model, sparse_labels)
